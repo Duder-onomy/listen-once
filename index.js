@@ -1,8 +1,10 @@
 'use strict';
 
 module.exports = function listenOnce(node, type, callback) {
-    node.addEventListener(type, function(e) {
-        e.target.removeEventListener(e.type, callback);
+    var listener = function(e) {
+        node.removeEventListener(type, listener);
         return callback(e);
-    });
+    };
+
+    node.addEventListener(type, listener, false);
 }
