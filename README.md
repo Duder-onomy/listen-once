@@ -12,7 +12,7 @@ Use it like:
 
 ```javascript
 
-listenOnce(element, eventName, handler);
+listenOnce(element, eventName, handler, capture);
 
 ```
 

@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function listenOnce(node, type, callback) {
+module.exports = function listenOnce(node, type, callback, capture) {
     var finished = false,
         listener = function(e) {
             if(type instanceof Array) {
@@ -16,11 +16,14 @@ module.exports = function listenOnce(node, type, callback) {
                 return callback(e);
             }
         };
+
+    capture = capture || false;
+
     if(type instanceof Array) {
         type.forEach(function(typeInstance) {
-            node.addEventListener(typeInstance, listener, false);
+            node.addEventListener(typeInstance, listener, capture);
         });
     } else {
-        node.addEventListener(type, listener, false);
+        node.addEventListener(type, listener, capture);
     }
 }
